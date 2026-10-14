@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Vehicle | Jack Vehicle Rental</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #eff6fb;
+    color: #1e293b;
+}
+
+header {
+    background: linear-gradient(120deg, #07515d, #079b91);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 8px;
+    font-size: 29px;
+}
+
+nav {
+    background: #10243b;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 11px 14px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+    background: #079b91;
+}
+
+main {
+    width: 92%;
+    max-width: 700px;
+    margin: 35px auto;
+}
+
+.panel {
+    background: white;
+    padding: 30px;
+    border-radius: 13px;
+    box-shadow: 0 6px 24px #10243b12;
+    border: 1px solid #dbe7ef;
+}
+
+h2 {
+    color: #087b7c;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 27px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+label {
+    display: block;
+    margin-top: 17px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: white;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #99f6e4;
+    border-color: #079b91;
+}
+
+input[readonly] {
+    background: #f1f5f9;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    margin-top: 23px;
+    background: linear-gradient(100deg, #079b91, #087d86);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#message {
+    margin-top: 17px;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+#message:empty {
+    display: none;
+}
+
+#message.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+#message.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+#message.info {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+footer {
+    background: #10243b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 13px;
+}
+
+@media(max-width: 600px) {
+    .panel {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    main {
+        width: 94%;
+        margin: 22px auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚘 Jack Vehicle Rental System</h1>
+    <p>Manage and Update Vehicle Details</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html">Search</a>
+    <a href="update.html" class="active">Update Vehicle</a>
+    <a href="delete.html">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<main>
+    <section class="panel">
+
+        <h2>✏️ Update Vehicle</h2>
+        <p class="subtitle">
+            Select a vehicle from your database, edit its details,
+            and save the changes.
+        </p>
+
+        <form id="updateForm">
+
+            <label for="veh_id">Select Vehicle</label>
+            <select id="veh_id" required>
+                <option value="">Loading vehicles...</option>
+            </select>
+
+            <label for="veh_no">Vehicle Number</label>
+            <input id="veh_no" type="text" readonly required>
+
+            <label for="veh_type">Vehicle Type</label>
+            <select id="veh_type" required>
+                <option value="CAR">Car</option>
+                <option value="BIKE">Bike</option>
+                <option value="SUV">SUV</option>
+                <option value="LORRY">Lorry</option>
+                <option value="AUTO">Auto</option>
+                <option value="BUS">Bus</option>
+            </select>
+
+            <label for="veh_model">Vehicle Model</label>
+            <input id="veh_model" type="text"
+                   placeholder="Enter vehicle model" required>
+
+            <label for="veh_rent_per_day">Rent Per Day (₹)</label>
+            <input id="veh_rent_per_day" type="number"
+                   min="1" step="0.01"
+                   placeholder="Enter daily rent" required>
+
+            <label for="veh_status">Vehicle Status</label>
+            <select id="veh_status" required>
+                <option value="AVAILABLE">Available</option>
+                <option value="RENTED">Rented</option>
+            </select>
+
+            <button type="submit" id="updateButton">
+                Save Vehicle Changes
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+        </form>
+    </section>
+</main>
+
+<footer>
+    © 2026 Jack Vehicle Rental System | All Rights Reserved
+</footer>
+
+<script>
+const select = document.getElementById("veh_id");
+const form = document.getElementById("updateForm");
+const message = document.getElementById("message");
+const updateButton = document.getElementById("updateButton");
+
+let vehicles = [];
+
+function showMessage(text, type = "info") {
+    message.textContent = text;
+    message.className = type;
+}
+
+async function readResponse(response) {
+    const text = await response.text();
+
+    let data;
+
+    try {
+        data = JSON.parse(text);
+    } catch {
+        throw new Error(
+            "Server JSON badhulu HTML return chesindi. " +
+            "API route and URL check cheyyi. HTTP " +
+            response.status
+        );
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            data.message || data.error || "Request failed"
+        );
+    }
+
+    return data;
+}
+
+async function loadVehicles() {
+    select.innerHTML = '<option value="">Loading vehicles...</option>';
+
+    try {
+        const response = await fetch("/api/vehicles");
+        const data = await readResponse(response);
+
+        // API array or {vehicles: [...]} format support
+        vehicles = Array.isArray(data)
+            ? data
+            : Array.isArray(data.vehicles)
+                ? data.vehicles
+                : [];
+
+        select.innerHTML =
+            '<option value="">Select Vehicle ID and Number</option>';
+
+        vehicles.forEach(vehicle => {
+            const option = document.createElement("option");
+            option.value = vehicle.veh_id;
+            option.textContent =
+                `${vehicle.veh_id} - ${vehicle.veh_no} - ${vehicle.veh_model}`;
+            select.appendChild(option);
+        });
+
+        if (vehicles.length === 0) {
+            showMessage("Database lo vehicles levu.", "info");
+            return;
+        }
+
+        const params = new URLSearchParams(location.search);
+        const vehicleId = params.get("vehicle");
+
+        if (vehicleId) {
+            select.value = vehicleId;
+            fillForm();
+        }
+    } catch (error) {
+        select.innerHTML =
+            '<option value="">Unable to load vehicles</option>';
+        showMessage(error.message, "error");
+        console.error("Load vehicles error:", error);
+    }
+}
+
+function fillForm() {
+    const vehicle = vehicles.find(
+        item => String(item.veh_id) === select.value
+    );
+
+    if (!vehicle) return;
+
+    document.getElementById("veh_no").value =
+        vehicle.veh_no || "";
+
+    const type = String(vehicle.veh_type || "").toUpperCase();
+    const typeSelect = document.getElementById("veh_type");
+
+    // Handle existing types not present in dropdown
+    if (![...typeSelect.options].some(option => option.value === type)) {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        typeSelect.appendChild(option);
+    }
+
+    typeSelect.value = type;
+
+    document.getElementById("veh_model").value =
+        vehicle.veh_model || "";
+
+    document.getElementById("veh_rent_per_day").value =
+        vehicle.veh_rent_per_day ?? "";
+
+    document.getElementById("veh_status").value =
+        String(vehicle.veh_status || "AVAILABLE").toUpperCase();
+
+    showMessage("", "info");
+}
+
+select.addEventListener("change", fillForm);
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (!select.value) {
+        showMessage("Please select a vehicle first.", "error");
+        return;
+    }
+
+    const vehicleId = select.value;
+
+    const vehicleData = {
+        veh_type: document.getElementById("veh_type").value,
+        veh_model: document.getElementById("veh_model").value.trim(),
+        veh_rent_per_day: Number(
+            document.getElementById("veh_rent_per_day").value
+        ),
+        veh_status: document.getElementById("veh_status").value
+    };
+
+    if (!vehicleData.veh_model ||
+        !Number.isFinite(vehicleData.veh_rent_per_day) ||
+        vehicleData.veh_rent_per_day <= 0) {
+        showMessage("Please enter valid vehicle details.", "error");
+        return;
+    }
+
+    updateButton.disabled = true;
+    updateButton.textContent = "Updating...";
+    showMessage("Updating vehicle details...", "info");
+
+    try {
+        const response = await fetch(
+            "/api/vehicles/" + encodeURIComponent(vehicleId),
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(vehicleData)
+            }
+        );
+
+        const result = await readResponse(response);
+
+        showMessage(
+            result.message || "Vehicle updated successfully!",
+            "success"
+        );
+
+        await loadVehicles();
+        select.value = vehicleId;
+        fillForm();
+
+        // Show success after filling the selected vehicle again
+        showMessage(
+            result.message || "Vehicle updated successfully!",
+            "success"
+        );
+
+    } catch (error) {
+        showMessage("Update failed: " + error.message, "error");
+        console.error("Update error:", error);
+    } finally {
+        updateButton.disabled = false;
+        updateButton.textContent = "Save Vehicle Changes";
+    }
+});
+
+loadVehicles();
+</script>
+
+</body>
+</html>

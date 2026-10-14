@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Jack Vehicle Rental System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f3f7fb;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #0b1f33;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: #20d6b5;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: #16b89b;
+            color: #06251f;
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 310px;
+            background:
+                linear-gradient(90deg, rgba(5, 22, 39, 0.92),
+                rgba(5, 22, 39, 0.45)),
+                url("https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1600&q=85");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 50px 8%;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #20d6b5;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #e2e8f0;
+            max-width: 560px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: rgba(32, 214, 181, 0.15);
+            color: #6ff4db;
+            border: 1px solid #20d6b5;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            font-size: 13px;
+        }
+
+        /* Main layout */
+        .container {
+            width: 88%;
+            max-width: 1150px;
+            margin: 45px auto;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-heading h2 {
+            color: #0b1f33;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: #64748b;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.3fr;
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        /* Contact information */
+        .contact-info {
+            background: linear-gradient(145deg, #0b1f33, #123e53);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.10);
+        }
+
+        .contact-info h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .info-intro {
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin: 23px 0;
+        }
+
+        .info-icon {
+            min-width: 43px;
+            height: 43px;
+            background: #20d6b5;
+            color: #082d29;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .info-item h3 {
+            font-size: 15px;
+            margin-bottom: 3px;
+            color: #6ff4db;
+        }
+
+        .info-item p,
+        .info-item a {
+            color: #e2e8f0;
+            font-size: 14px;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .info-item a:hover {
+            color: #6ff4db;
+        }
+
+        .info-note {
+            margin-top: 25px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 9px;
+            color: #e2e8f0;
+            font-size: 13px;
+        }
+
+        /* Contact form */
+        .contact-form {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-form h2 {
+            color: #0b1f33;
+            font-size: 25px;
+            margin-bottom: 6px;
+        }
+
+        .form-description {
+            color: #64748b;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #334155;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            background: #fbfdff;
+            color: #1e293b;
+            transition: 0.25s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #16b89b;
+            box-shadow: 0 0 0 3px rgba(22, 184, 155, 0.12);
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 135px;
+            resize: vertical;
+        }
+
+        .required {
+            color: #e11d48;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 18px;
+            background: #12b89a;
+            color: #06251f;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #0e9f85;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .form-status {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .form-status.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        /* Bottom banner */
+        .help-banner {
+            margin-top: 35px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .help-banner h3 {
+            color: #0b1f33;
+            margin-bottom: 5px;
+        }
+
+        .help-banner p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .help-button {
+            display: inline-block;
+            text-decoration: none;
+            background: #0b1f33;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .help-button:hover {
+            background: #16b89b;
+            color: #06251f;
+        }
+
+        /* Footer */
+        footer {
+            background: #071827;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 22px 15px;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        footer span {
+            color: #20d6b5;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 850px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 270px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 22px;
+            }
+
+            nav {
+                gap: 4px;
+            }
+
+            nav a {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .section-heading h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header and six-page navigation -->
+    <header>
+        <div class="logo">🚘 JACK <span>VEHICLE RENTAL</span></div>
+
+        
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html">Search</a>
+    <a href="update.html">Update Vehicle</a>
+    <a href="delete.html">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-label">WE ARE HERE TO HELP</span>
+            <h1>Let's <span>Talk</span></h1>
+            <p>
+                Have a question about vehicle rentals, bookings, pricing,
+                or available vehicles? Contact our team and let us help
+                you plan your next journey.
+            </p>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <div class="section-heading">
+            <h2>Get in Touch</h2>
+            <p>We would love to hear from you. Send us your questions or feedback.</p>
+        </div>
+
+        <div class="contact-layout">
+
+            <!-- Contact information -->
+            <section class="contact-info">
+                <h2>Contact Information</h2>
+                <p class="info-intro">
+                    Reach out to Jack Vehicle Rental System for assistance
+                    with your rental needs.
+                </p>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <h3>Our Location</h3>
+                        <p>Your City, Telangana, India</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <h3>Phone Number</h3>
+                        <p>+91 XXXXX XXXXX</p>
+                        <p>Replace with your contact number</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div>
+                        <h3>Email Address</h3>
+                        <p>
+                            <a href="mailto:your-email@example.com">
+                                your-email@example.com
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">🕒</div>
+                    <div>
+                        <h3>Business Hours</h3>
+                        <p>Monday – Saturday</p>
+                        <p>9:00 AM – 7:00 PM</p>
+                        <p>Sunday: By appointment</p>
+                    </div>
+                </div>
+
+                <div class="info-note">
+                    💡 <strong>Quick Tip:</strong> For faster assistance,
+                    mention your booking ID if you have already made a reservation.
+                </div>
+            </section>
+
+            <!-- Customer message form -->
+            <section class="contact-form">
+                <h2>Send Us a Message</h2>
+                <p class="form-description">
+                    Fill in the details below and tell us how we can help.
+                </p>
+
+                <form id="contactForm">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">
+                                Full Name <span class="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your full name"
+                                minlength="2"
+                                maxlength="100"
+                                autocomplete="name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">
+                                Phone Number <span class="required">*</span>
+                            </label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Enter phone number"
+                                pattern="[0-9 +()-]{10,16}"
+                                title="Enter a valid phone number"
+                                autocomplete="tel"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            Email Address <span class="required">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            maxlength="150"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">
+                            Subject <span class="required">*</span>
+                        </label>
+                        <select id="subject" name="subject" required>
+                            <option value="">-- Select a Subject --</option>
+                            <option value="Vehicle Availability">Vehicle Availability</option>
+                            <option value="Booking Enquiry">Booking Enquiry</option>
+                            <option value="Booking Modification">Booking Modification</option>
+                            <option value="Cancellation">Booking Cancellation</option>
+                            <option value="Pricing and Offers">Pricing and Offers</option>
+                            <option value="Payment Enquiry">Payment Enquiry</option>
+                            <option value="Vehicle Complaint">Vehicle Complaint</option>
+                            <option value="Feedback">Feedback or Suggestion</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookingId">Booking ID (Optional)</label>
+                        <input
+                            type="text"
+                            id="bookingId"
+                            name="bookingId"
+                            placeholder="Enter booking ID if available"
+                            maxlength="30"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">
+                            Your Message <span class="required">*</span>
+                        </label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Write your question or message here..."
+                            minlength="10"
+                            maxlength="2000"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Send Message &nbsp; ➜
+                    </button>
+
+                    <div
+                        id="formStatus"
+                        class="form-status"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                </form>
+            </section>
+
+        </div>
+
+        <!-- Help banner -->
+        <section class="help-banner">
+            <div>
+                <h3>Need to rent a vehicle?</h3>
+                <p>Explore our vehicle collection and choose the right ride for your journey.</p>
+            </div>
+            <a href="vehicles.html" class="help-button">Explore Vehicles →</a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 <span>Jack Vehicle Rental System</span>. All Rights Reserved.</p>
+        <p>Reliable Rides. Comfortable Journeys.</p>
+    </footer>
+
+    <script>
+        const contactForm = document.getElementById("contactForm");
+        const formStatus = document.getElementById("formStatus");
+
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            formStatus.className = "form-status success";
+            formStatus.textContent =
+                "Demo only: Your form is valid, but the message has not been sent or saved. Connect a backend to receive customer messages.";
+
+            contactForm.reset();
+        });
+    </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Book a Vehicle | Jack Vehicle Rental System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    color: #172033;
+}
+
+/* HEADER */
+header {
+    background: #102542;
+    color: white;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    color: #42d6c5;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 11px 12px;
+    border-radius: 7px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+    background: #42d6c5;
+    color: #102542;
+}
+
+/* BANNER */
+.banner {
+    background: linear-gradient(120deg, #102542, #087f8c);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.banner h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    margin-bottom: 12px;
+}
+
+.banner p {
+    color: #e2f6f7;
+    line-height: 1.7;
+}
+
+/* MAIN CONTENT */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.booking-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px #10254214;
+}
+
+/* IMAGE PANEL */
+.image-panel {
+    background: #102542;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-panel img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+}
+
+.image-content {
+    padding: 26px;
+}
+
+.image-content h2 {
+    color: #42d6c5;
+    margin-bottom: 14px;
+    font-size: 25px;
+}
+
+.image-content p {
+    color: #e2e8f0;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.benefit {
+    margin-top: 18px;
+    line-height: 2.2;
+    font-size: 14px;
+}
+
+/* FORM */
+.form-panel {
+    padding: 32px;
+}
+
+.form-panel h2 {
+    color: #102542;
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    color: #334155;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d5dce8;
+    border-radius: 8px;
+    background: white;
+    color: #172033;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #087f8c;
+    box-shadow: 0 0 0 3px #087f8c15;
+}
+
+input[readonly] {
+    background: #f1f5f9;
+}
+
+.help-text {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* PRICE SUMMARY */
+.summary {
+    margin-top: 24px;
+    background: #eaf8f7;
+    border: 1px solid #ccece8;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.summary h3 {
+    color: #102542;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 7px 0;
+    color: #475569;
+    font-size: 14px;
+}
+
+.summary-row.total {
+    border-top: 1px solid #ccece8;
+    margin-top: 8px;
+    padding-top: 14px;
+    color: #087f8c;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* BUTTONS */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #087f8c;
+    color: white;
+    flex: 1;
+}
+
+.btn-primary:hover {
+    background: #102542;
+}
+
+.btn-secondary {
+    background: #e8edf4;
+    color: #334155;
+}
+
+.btn-secondary:hover {
+    background: #d5dce8;
+}
+
+.btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* MESSAGE */
+.message {
+    display: none;
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.message.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.message.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* FOOTER */
+footer {
+    background: #102542;
+    color: white;
+    text-align: center;
+    padding: 24px 15px;
+    line-height: 1.8;
+    margin-top: 50px;
+}
+
+footer span {
+    color: #42d6c5;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 800px) {
+    .booking-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .image-panel img {
+        height: 280px;
+    }
+}
+
+@media (max-width: 550px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    nav a {
+        padding: 9px;
+        font-size: 12px;
+    }
+
+    .form-panel {
+        padding: 22px 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER: SIX PAGE NAVIGATION -->
+<header>
+    <div class="logo">🚘 JACK RENTALS</div>
+
+    
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html">Search</a>
+    <a href="update.html">Update Vehicle</a>
+    <a href="delete.html">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
+<!-- BANNER -->
+<section class="banner">
+    <h1>Book Your Vehicle</h1>
+    <p>Complete your booking details and get ready for your journey.</p>
+</section>
+
+<!-- BOOKING FORM -->
+<main class="container">
+    <div class="booking-layout">
+
+        <!-- CAR IMAGE -->
+        <div class="image-panel">
+            <img
+                src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1000&q=80"
+                alt="Car available for rental">
+
+            <div class="image-content">
+                <h2>Your Journey Starts Here</h2>
+
+                <p>
+                    Select your preferred vehicle, choose your rental
+                    period and submit your booking request.
+                </p>
+
+                <div class="benefit">
+                    <p>✓ Affordable daily rental rates</p>
+                    <p>✓ Multiple vehicle categories</p>
+                    <p>✓ Easy booking request</p>
+                    <p>✓ Clear rental cost estimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CUSTOMER FORM -->
+        <div class="form-panel">
+            <h2>Booking Details</h2>
+
+            <p class="subtitle">
+                Enter your customer and rental details.
+                Fields marked * are required.
+            </p>
+
+            <form id="bookingForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+                        <label for="customer_name">Customer Name *</label>
+                        <input
+                            type="text"
+                            id="customer_name"
+                            name="customer_name"
+                            placeholder="Enter full name"
+                            maxlength="100"
+                            autocomplete="name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer_phone">Phone Number *</label>
+                        <input
+                            type="tel"
+                            id="customer_phone"
+                            name="customer_phone"
+                            placeholder="Enter phone number"
+                            maxlength="15"
+                            autocomplete="tel"
+                            pattern="[0-9+() -]{7,15}"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer_email">Email Address</label>
+                        <input
+                            type="email"
+                            id="customer_email"
+                            name="customer_email"
+                            placeholder="example@email.com"
+                            maxlength="150"
+                            autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicle_type">Vehicle Type *</label>
+                        <select id="vehicle_type" name="vehicle_type" required>
+                            <option value="">Select vehicle type</option>
+                            <option value="Car">Car</option>
+                            <option value="Bike">Bike</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Van">Van</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicle_model">Vehicle Model *</label>
+                        <select id="vehicle_model" name="vehicle_model" required>
+                            <option value="">Select vehicle model</option>
+                        </select>
+                        <span class="help-text">
+                            First select the vehicle type.
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start_date">Rental Start Date *</label>
+                        <input
+                            type="date"
+                            id="start_date"
+                            name="start_date"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rental_days">Rental Duration *</label>
+                        <select id="rental_days" name="rental_days" required>
+                            <option value="">Select rental days</option>
+                            <option value="1">1 Day</option>
+                            <option value="2">2 Days</option>
+                            <option value="3">3 Days</option>
+                            <option value="5">5 Days</option>
+                            <option value="7">7 Days</option>
+                            <option value="10">10 Days</option>
+                            <option value="15">15 Days</option>
+                            <option value="30">30 Days</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="payment_method">Payment Method *</label>
+                        <select id="payment_method" name="payment_method" required>
+                            <option value="">Select payment method</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Card">Debit / Credit Card</option>
+                            <option value="Net Banking">Net Banking</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ESTIMATED RENT -->
+                <div class="summary">
+                    <h3>💰 Rental Cost Estimate</h3>
+
+                    <div class="summary-row">
+                        <span>Daily Rent</span>
+                        <span id="dailyRent">₹0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Rental Days</span>
+                        <span id="daysDisplay">0 days</span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Estimated Total</span>
+                        <span id="totalRent">₹0</span>
+                    </div>
+
+                    <p class="help-text" style="margin-top:10px">
+                        Estimate only. Final charges and availability
+                        must be confirmed by the rental provider.
+                    </p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            id="submitBtn">
+                        Confirm Booking Request
+                    </button>
+
+                    <button type="reset"
+                            class="btn btn-secondary">
+                        Clear
+                    </button>
+                </div>
+
+                <div id="message" class="message"
+                     role="status" aria-live="polite"></div>
+
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 <span>Jack Vehicle Rental System</span></p>
+    <p>Your journey, our responsibility.</p>
+</footer>
+
+<script>
+const bookingForm = document.getElementById("bookingForm");
+const vehicleType = document.getElementById("vehicle_type");
+const vehicleModel = document.getElementById("vehicle_model");
+const startDate = document.getElementById("start_date");
+const rentalDays = document.getElementById("rental_days");
+const paymentMethod = document.getElementById("payment_method");
+const messageBox = document.getElementById("message");
+const submitBtn = document.getElementById("submitBtn");
+
+const dailyRent = document.getElementById("dailyRent");
+const daysDisplay = document.getElementById("daysDisplay");
+const totalRent = document.getElementById("totalRent");
+
+/*
+  Demo catalogue and estimated daily prices.
+  Replace with actual available vehicles from MySQL
+  when the vehicle-list API is connected.
+*/
+const vehicleCatalogue = {
+    Car: [
+        { model: "Hyundai Verna", rent: 2000 },
+        { model: "Toyota Innova", rent: 2800 }
+    ],
+    Bike: [
+        { model: "Royal Enfield", rent: 800 },
+        { model: "Honda Activa", rent: 400 }
+    ],
+    SUV: [
+        { model: "Mahindra Scorpio", rent: 3500 },
+        { model: "Toyota Fortuner", rent: 5000 }
+    ],
+    Van: [
+        { model: "Passenger Van", rent: 2500 }
+    ],
+    Other: [
+        { model: "Other Vehicle", rent: 1500 }
+    ]
+};
+
+let selectedRent = 0;
+
+// Set the earliest selectable booking date to today.
+const today = new Date();
+const localToday = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+].join("-");
+
+startDate.min = localToday;
+
+function formatRupees(amount) {
+    return "₹" + amount.toLocaleString("en-IN");
+}
+
+// Populate vehicle models when the type changes.
+vehicleType.addEventListener("change", function() {
+    vehicleModel.innerHTML =
+        '<option value="">Select vehicle model</option>';
+
+    const options = vehicleCatalogue[vehicleType.value] || [];
+
+    options.forEach(function(vehicle) {
+        const option = document.createElement("option");
+        option.value = vehicle.model;
+        option.textContent = vehicle.model;
+        option.dataset.rent = vehicle.rent;
+        vehicleModel.appendChild(option);
+    });
+
+    selectedRent = 0;
+    updateSummary();
+});
+
+// Update the price estimate.
+vehicleModel.addEventListener("change", function() {
+    const selectedOption = vehicleModel.options[
+        vehicleModel.selectedIndex
+    ];
+
+    selectedRent = Number(selectedOption.dataset.rent || 0);
+    updateSummary();
+});
+
+rentalDays.addEventListener("change", updateSummary);
+
+function updateSummary() {
+    const days = Number(rentalDays.value || 0);
+    const total = selectedRent * days;
+
+    dailyRent.textContent = formatRupees(selectedRent);
+    daysDisplay.textContent = days + (days === 1 ? " day" : " days");
+    totalRent.textContent = formatRupees(total);
+}
+
+// Display booking API result.
+bookingForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    messageBox.className = "message";
+    messageBox.textContent = "";
+
+    if (startDate.value < localToday) {
+        messageBox.className = "message error";
+        messageBox.textContent =
+            "Please select today or a future rental start date.";
+        return;
+    }
+
+    if (!selectedRent || !vehicleModel.value) {
+        messageBox.className = "message error";
+        messageBox.textContent =
+            "Please select a valid vehicle type and model.";
+        return;
+    }
+
+    const bookingData = {
+        customer_name: document.getElementById("customer_name")
+            .value.trim(),
+
+        customer_phone: document.getElementById("customer_phone")
+            .value.trim(),
+
+        customer_email: document.getElementById("customer_email")
+            .value.trim(),
+
+        vehicle_type: vehicleType.value,
+        vehicle_model: vehicleModel.value,
+        start_date: startDate.value,
+        rental_days: Number(rentalDays.value),
+        payment_method: paymentMethod.value
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+        const response = await fetch("/api/bookings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bookingData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                result.message || result.error ||
+                "Booking request could not be saved."
+            );
+        }
+
+        messageBox.className = "message success";
+        messageBox.textContent =
+            result.message || "Booking request submitted successfully!";
+
+        bookingForm.reset();
+        vehicleModel.innerHTML =
+            '<option value="">Select vehicle model</option>';
+        selectedRent = 0;
+        updateSummary();
+
+    } catch (error) {
+        messageBox.className = "message error";
+
+        if (error instanceof TypeError) {
+            messageBox.textContent =
+                "Cannot connect to the server. Please start server.js " +
+                "and open this page through http://localhost:3000.";
+        } else {
+            messageBox.textContent = error.message;
+        }
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Confirm Booking Request";
+    }
+});
+
+// Reset the price estimate when the form is cleared.
+bookingForm.addEventListener("reset", function() {
+    setTimeout(function() {
+        vehicleModel.innerHTML =
+            '<option value="">Select vehicle model</option>';
+        selectedRent = 0;
+        updateSummary();
+        messageBox.className = "message";
+        messageBox.textContent = "";
+    }, 0);
+});
+</script>
+
+</body>
+</html>
+```

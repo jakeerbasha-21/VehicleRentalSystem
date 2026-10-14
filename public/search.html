@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Vehicles | Jack Vehicle Rental</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #eff7fb;
+    color: #172b45;
+}
+
+header {
+    background: linear-gradient(110deg, #07515d, #079b91);
+    color: white;
+    padding: 22px 5%;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo {
+    font-size: 48px;
+}
+
+header h1 {
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+header p {
+    font-size: 15px;
+}
+
+nav {
+    background: #10243b;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 13px 18px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+    background: #079b91;
+}
+
+.page-heading {
+    text-align: center;
+    padding: 27px 15px 18px;
+}
+
+.page-heading h2 {
+    font-size: 30px;
+    color: #087b7c;
+    margin-bottom: 10px;
+}
+
+.page-heading p {
+    color: #475569;
+    font-size: 14px;
+}
+
+.container {
+    width: 94%;
+    max-width: 1400px;
+    margin: 0 auto 35px;
+}
+
+.search-box {
+    background: white;
+    border: 1px solid #d8e5ed;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 18px #17324d10;
+    margin-bottom: 25px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd9e5;
+    border-radius: 7px;
+    font-size: 14px;
+    background: #fff;
+    color: #24364b;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: 2px solid #0d9488;
+    border-color: #0d9488;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 13px 23px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.search-btn {
+    color: white;
+    background: linear-gradient(100deg, #079b91, #087d86);
+}
+
+.reset-btn {
+    background: #e2e8f0;
+    color: #24364b;
+}
+
+button:hover,
+.book-btn:hover {
+    opacity: .85;
+}
+
+.results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 25px 0 17px;
+}
+
+.results-heading h2 {
+    font-size: 27px;
+}
+
+#resultCount {
+    background: #c9f3ec;
+    color: #075e62;
+    padding: 9px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#results {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.vehicle-card {
+    background: white;
+    border: 1px solid #d9e5ed;
+    border-radius: 10px;
+    padding: 13px;
+    box-shadow: 0 4px 12px #15334a0b;
+    transition: .25s;
+    min-width: 0;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 20px #15334a17;
+}
+
+.vehicle-image {
+    width: 100%;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 7px;
+    display: block;
+    background: #e2e8f0;
+    margin-bottom: 12px;
+}
+
+.vehicle-card h3 {
+    font-size: 16px;
+    color: #142c48;
+    margin-bottom: 9px;
+}
+
+.vehicle-info {
+    display: grid;
+    grid-template-columns: 15px 105px 8px minmax(0, 1fr);
+    gap: 5px;
+    align-items: start;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.info-icon {
+    color: #234b6b;
+    font-weight: bold;
+}
+
+.status {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 5px 11px;
+    border-radius: 18px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.available {
+    background: #bbf7d0;
+    color: #166534;
+}
+
+.rented {
+    background: #fecaca;
+    color: #b91c1c;
+}
+
+.book-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(100deg, #079b91, #078b91);
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.disabled-btn {
+    display: block;
+    text-align: center;
+    background: #e2e8f0;
+    color: #475569;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.message {
+    background: white;
+    padding: 28px;
+    text-align: center;
+    border-radius: 10px;
+    grid-column: 1 / -1;
+    color: #475569;
+    line-height: 1.8;
+}
+
+footer {
+    background: #10243b;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+}
+
+@media (max-width: 1050px) {
+    #results {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    #results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .logo {
+        font-size: 35px;
+    }
+
+    .vehicle-image {
+        height: 125px;
+    }
+
+    .vehicle-info {
+        grid-template-columns: 12px minmax(75px, 1fr);
+        gap: 3px 6px;
+    }
+
+    .vehicle-info .colon {
+        display: none;
+    }
+
+    .vehicle-info .info-value {
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 450px) {
+    #results,
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        padding: 16px;
+    }
+
+    .page-heading h2 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo">🚘</div>
+        <div>
+            <h1>Jack Vehicle Rental System</h1>
+            <p>Find the right vehicle for your journey</p>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html" class="active">Search</a>
+    <a href="update.html">Update Vehicle</a>
+    <a href="delete.html">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<div class="page-heading">
+    <h2>⌕ Search Available Vehicles</h2>
+    <p>Find the perfect vehicle for your trip. Filter by your preferences.</p>
+</div>
+
+<main class="container">
+
+    <section class="search-box">
+        <form id="searchForm">
+            <div class="filters">
+
+                <div class="form-group">
+                    <label for="veh_no">Vehicle Number</label>
+                    <input id="veh_no" type="text"
+                           placeholder="Example: AP39AB1234">
+                </div>
+
+                <div class="form-group">
+                    <label for="veh_type">Vehicle Type</label>
+                    <select id="veh_type">
+                        <option value="All">All Types</option>
+                        <option value="CAR">Car</option>
+                        <option value="BIKE">Bike</option>
+                        <option value="SUV">SUV</option>
+                        <option value="LORRY">Lorry</option>
+                        <option value="AUTO">Auto</option>
+                        <option value="BUS">Bus</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="veh_status">Vehicle Status</label>
+                    <select id="veh_status">
+                        <option value="All">All Statuses</option>
+                        <option value="AVAILABLE">Available</option>
+                        <option value="RENTED">Rented</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="budget">Maximum Rent Per Day (₹)</label>
+                    <input id="budget" type="number" min="0"
+                           placeholder="Example: 3000">
+                </div>
+
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="search-btn">
+                    🔍 Search Vehicles
+                </button>
+                <button type="reset" class="reset-btn">
+                    ↻ Reset Filters
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <div class="results-heading">
+        <h2>🚗 Vehicle Results</h2>
+        <p id="resultCount">Loading vehicles...</p>
+    </div>
+
+    <section id="results">
+        <p class="message">Loading vehicles from database...</p>
+    </section>
+
+</main>
+
+<footer>
+    © 2026 Jack Vehicle Rental System | All Rights Reserved
+</footer>
+
+<script>
+const searchForm = document.getElementById("searchForm");
+const results = document.getElementById("results");
+const resultCount = document.getElementById("resultCount");
+
+/* Images selected according to vehicle type */
+const vehicleImages = {
+    CAR: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80",
+    BIKE: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80",
+    SUV: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80",
+    LORRY: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80",
+    AUTO: "https://images.unsplash.com/photo-1592840331051-1c9e4e7c5a89?auto=format&fit=crop&w=800&q=80",
+    BUS: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80",
+};
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+async function searchVehicles() {
+    const params = new URLSearchParams();
+
+    const vehNo = document.getElementById("veh_no").value.trim();
+    const vehType = document.getElementById("veh_type").value;
+    const vehStatus = document.getElementById("veh_status").value;
+    const budget = document.getElementById("budget").value;
+
+    if (vehNo) params.set("veh_no", vehNo);
+    if (vehType !== "All") params.set("veh_type", vehType);
+    if (vehStatus !== "All") params.set("veh_status", vehStatus);
+    if (budget !== "") params.set("budget", budget);
+
+    results.innerHTML = '<p class="message">Searching vehicles...</p>';
+    resultCount.textContent = "Please wait...";
+
+    try {
+        const response = await fetch("/api/search?" + params.toString());
+
+        if (!response.ok) {
+            throw new Error("Server returned HTTP " + response.status);
+        }
+
+        const data = await response.json();
+
+        const vehicles = Array.isArray(data)
+            ? data
+            : Array.isArray(data.vehicles)
+                ? data.vehicles
+                : [];
+
+        if (!Array.isArray(data) && !Array.isArray(data.vehicles)) {
+            throw new Error(data.message || "Invalid API response");
+        }
+
+        resultCount.textContent = vehicles.length + " vehicle(s) found";
+
+        if (vehicles.length === 0) {
+            results.innerHTML =
+                '<p class="message">No vehicles found. Please change your filters.</p>';
+            return;
+        }
+
+        results.innerHTML = vehicles.map(vehicle => {
+            const type = String(vehicle.veh_type || "").toUpperCase();
+            const status = String(vehicle.veh_status || "").toUpperCase();
+            const available = status === "AVAILABLE";
+
+            const model = String(vehicle.veh_model || "").toUpperCase();
+
+let image = vehicleImages[type] || vehicleImages.CAR;
+
+if (model.includes("ROYAL ENFIELD")) {
+    image = "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80";
+} else if (model.includes("GT")) {
+    image = "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80";
+} else if (model.includes("THAR")) {
+    image = "https://images.unsplash.com/photo-1785330865151-f2120b37469c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D";
+} else if (model.includes("FORTUNER")) {
+    image = "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80";
+} else if (model.includes("HYUNDAI")) {
+    image = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80";
+} else if (model.includes("MARUTI")) {
+    image = "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80";
+} else if (model.includes("ASHOK")) {
+    image = "https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80";
+} else if (model.includes("APE")) {
+    image = "https://images.unsplash.com/photo-1639919397870-cc2c183be021?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D";
+}
+            const safeModel = escapeHTML(vehicle.veh_model || "Vehicle");
+            const safeNumber = escapeHTML(vehicle.veh_no || "");
+            const safeType = escapeHTML(vehicle.veh_type || "");
+            const safeRent = escapeHTML(vehicle.veh_rent_per_day ?? "0");
+            const safeStatus = escapeHTML(vehicle.veh_status || "Unknown");
+
+            const bookingLink = "booking.html?veh_no=" +
+                encodeURIComponent(vehicle.veh_no || "") +
+                "&model=" + encodeURIComponent(vehicle.veh_model || "") +
+                "&type=" + encodeURIComponent(vehicle.veh_type || "");
+
+            return `
+                <article class="vehicle-card">
+
+                    <img class="vehicle-image"
+                         src="${image}"
+                         alt="${safeModel}"
+                         loading="lazy"
+                         onerror="this.onerror=null;this.src='https://placehold.co/800x400/e2e8f0/334155?text=Vehicle+Image';">
+
+                    <h3>${safeModel}</h3>
+
+                    <div class="vehicle-info">
+                        <span class="info-icon">🚘</span>
+                        <span>Vehicle Number</span>
+                        <span class="colon">:</span>
+                        <span class="info-value">${safeNumber}</span>
+
+                        <span class="info-icon">◆</span>
+                        <span>Type</span>
+                        <span class="colon">:</span>
+                        <span class="info-value">${safeType}</span>
+
+                        <span class="info-icon">₹</span>
+                        <span>Rent per day</span>
+                        <span class="colon">:</span>
+                        <span class="info-value">₹${safeRent}</span>
+                    </div>
+
+                    <div>
+                        <span class="status ${available ? "available" : "rented"}">
+                            ${safeStatus}
+                        </span>
+                    </div>
+
+                    ${available
+                        ? `<a class="book-btn" href="${bookingLink}">▣ &nbsp; Book Now</a>`
+                        : `<span class="disabled-btn">⊘ &nbsp; Currently Rented</span>`
+                    }
+
+                </article>
+            `;
+        }).join("");
+
+    } catch (error) {
+        console.error("Search error:", error);
+        resultCount.textContent = "Search failed";
+        results.innerHTML = `
+            <p class="message">
+                Unable to load vehicles.<br>
+                ${escapeHTML(error.message)}<br><br>
+                Check that your Node.js server and MySQL database are running.
+            </p>`;
+    }
+}
+
+searchForm.addEventListener("submit", event => {
+    event.preventDefault();
+    searchVehicles();
+});
+
+searchForm.addEventListener("reset", () => {
+    setTimeout(searchVehicles, 0);
+});
+
+searchVehicles();
+</script>
+
+</body>
+</html>

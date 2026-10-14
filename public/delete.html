@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Vehicle | Jack Vehicle Rental</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #eff6fb;
+    color: #1e293b;
+}
+
+header {
+    background: linear-gradient(120deg, #07515d, #079b91);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 8px;
+    font-size: 29px;
+}
+
+nav {
+    background: #10243b;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 11px 14px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+nav a:hover,
+nav a.active {
+    background: #079b91;
+}
+
+main {
+    width: 92%;
+    max-width: 700px;
+    margin: 35px auto;
+}
+
+.panel {
+    background: white;
+    padding: 30px;
+    border-radius: 13px;
+    box-shadow: 0 6px 24px #10243b12;
+    border: 1px solid #dbe7ef;
+}
+
+h2 {
+    color: #b91c1c;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 27px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.warning {
+    background: #fff1f2;
+    color: #9f1239;
+    border: 1px solid #fecdd3;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+label {
+    display: block;
+    margin-top: 17px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: white;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+input[readonly] {
+    background: #f1f5f9;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #99f6e4;
+    border-color: #079b91;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    margin-top: 23px;
+    background: linear-gradient(100deg, #dc2626, #991b1b);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#message {
+    margin-top: 17px;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+#message:empty {
+    display: none;
+}
+
+#message.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+#message.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+#message.info {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+footer {
+    background: #10243b;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 13px;
+}
+
+@media(max-width: 600px) {
+    .panel {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    main {
+        width: 94%;
+        margin: 22px auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚘 Jack Vehicle Rental System</h1>
+    <p>Manage and Delete Vehicle Details</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html">Search</a>
+    <a href="update.html">Update Vehicle</a>
+    <a href="delete.html" class="active">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<main>
+    <section class="panel">
+
+        <h2>🗑️ Delete Vehicle</h2>
+
+        <p class="subtitle">
+            Select a vehicle from your database and remove it
+            from the vehicle records.
+        </p>
+
+        <div class="warning">
+            ⚠️ <strong>Warning:</strong> Deleting a vehicle is a
+            permanent action. Please verify the vehicle details
+            before confirming.
+        </div>
+
+        <form id="deleteForm">
+
+            <label for="veh_id">Select Vehicle</label>
+            <select id="veh_id" required>
+                <option value="">Loading vehicles...</option>
+            </select>
+
+            <label for="veh_no">Vehicle Number</label>
+            <input id="veh_no" type="text" readonly>
+
+            <label for="veh_type">Vehicle Type</label>
+            <input id="veh_type" type="text" readonly>
+
+            <label for="veh_model">Vehicle Model</label>
+            <input id="veh_model" type="text" readonly>
+
+            <label for="veh_rent_per_day">Rent Per Day (₹)</label>
+            <input id="veh_rent_per_day" type="text" readonly>
+
+            <label for="veh_status">Vehicle Status</label>
+            <input id="veh_status" type="text" readonly>
+
+            <button type="submit" id="deleteButton">
+                🗑️ Delete Selected Vehicle
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+        </form>
+    </section>
+</main>
+
+<footer>
+    © 2026 Jack Vehicle Rental System | All Rights Reserved
+</footer>
+
+<script>
+const select = document.getElementById("veh_id");
+const form = document.getElementById("deleteForm");
+const message = document.getElementById("message");
+const deleteButton = document.getElementById("deleteButton");
+
+let vehicles = [];
+
+function showMessage(text, type = "info") {
+    message.textContent = text;
+    message.className = type;
+}
+
+async function readResponse(response) {
+    const text = await response.text();
+
+    let data;
+
+    try {
+        data = JSON.parse(text);
+    } catch {
+        throw new Error(
+            "Server JSON badhulu HTML return chesindi. " +
+            "API route check cheyyi. HTTP " + response.status
+        );
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            data.message || data.error || "Request failed"
+        );
+    }
+
+    return data;
+}
+
+async function loadVehicles() {
+    select.innerHTML =
+        '<option value="">Loading vehicles...</option>';
+
+    try {
+        const response = await fetch("/api/vehicles");
+        const data = await readResponse(response);
+
+        vehicles = Array.isArray(data)
+            ? data
+            : Array.isArray(data.vehicles)
+                ? data.vehicles
+                : [];
+
+        select.innerHTML =
+            '<option value="">Select Vehicle ID and Number</option>';
+
+        vehicles.forEach(vehicle => {
+            const option = document.createElement("option");
+
+            option.value = vehicle.veh_id;
+            option.textContent =
+                `${vehicle.veh_id} - ${vehicle.veh_no} - ${vehicle.veh_model}`;
+
+            select.appendChild(option);
+        });
+
+        if (vehicles.length === 0) {
+            showMessage("Database lo vehicles levu.", "info");
+        }
+
+        const params = new URLSearchParams(location.search);
+        const vehicleId = params.get("vehicle");
+
+        if (vehicleId) {
+            select.value = vehicleId;
+            fillForm();
+        }
+
+    } catch (error) {
+        select.innerHTML =
+            '<option value="">Unable to load vehicles</option>';
+
+        showMessage(error.message, "error");
+        console.error("Load vehicles error:", error);
+    }
+}
+
+function fillForm() {
+    const vehicle = vehicles.find(
+        item => String(item.veh_id) === select.value
+    );
+
+    if (!vehicle) {
+        clearForm();
+        return;
+    }
+
+    document.getElementById("veh_no").value =
+        vehicle.veh_no || "";
+
+    document.getElementById("veh_type").value =
+        vehicle.veh_type || "";
+
+    document.getElementById("veh_model").value =
+        vehicle.veh_model || "";
+
+    document.getElementById("veh_rent_per_day").value =
+        vehicle.veh_rent_per_day ?? "";
+
+    document.getElementById("veh_status").value =
+        vehicle.veh_status || "";
+
+    showMessage("", "info");
+}
+
+function clearForm() {
+    document.getElementById("veh_no").value = "";
+    document.getElementById("veh_type").value = "";
+    document.getElementById("veh_model").value = "";
+    document.getElementById("veh_rent_per_day").value = "";
+    document.getElementById("veh_status").value = "";
+}
+
+select.addEventListener("change", fillForm);
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (!select.value) {
+        showMessage("Please select a vehicle first.", "error");
+        return;
+    }
+
+    const vehicle = vehicles.find(
+        item => String(item.veh_id) === select.value
+    );
+
+    if (!vehicle) {
+        showMessage("Selected vehicle not found.", "error");
+        return;
+    }
+
+    const confirmed = window.confirm(
+        "Are you sure you want to delete vehicle " +
+        vehicle.veh_no + " (" + vehicle.veh_model + ")?"
+    );
+
+    if (!confirmed) {
+        showMessage("Vehicle deletion cancelled.", "info");
+        return;
+    }
+
+    const vehicleId = select.value;
+
+    deleteButton.disabled = true;
+    deleteButton.textContent = "Deleting...";
+
+    showMessage("Deleting vehicle...", "info");
+
+    try {
+        const response = await fetch(
+            "/api/vehicles/" + encodeURIComponent(vehicleId),
+            {
+                method: "DELETE"
+            }
+        );
+
+        const result = await readResponse(response);
+
+        vehicles = vehicles.filter(
+            item => String(item.veh_id) !== vehicleId
+        );
+
+        select.value = "";
+        clearForm();
+
+        select.querySelector(
+            `option[value="${CSS.escape(vehicleId)}"]`
+        )?.remove();
+
+        showMessage(
+            result.message || "Vehicle deleted successfully!",
+            "success"
+        );
+
+        await loadVehicles();
+
+    } catch (error) {
+        showMessage("Delete failed: " + error.message, "error");
+        console.error("Delete vehicle error:", error);
+    } finally {
+        deleteButton.disabled = false;
+        deleteButton.textContent = "🗑️ Delete Selected Vehicle";
+    }
+});
+
+loadVehicles();
+</script>
+
+</body>
+</html>

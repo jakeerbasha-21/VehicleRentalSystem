@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicles | Jack Vehicle Rental System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        :root {
+            --navy: #071e35;
+            --teal: #12bfa5;
+            --teal-dark: #07977f;
+            --bg: #f3f8fc;
+            --text: #25364a;
+            --muted: #64748b;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background: var(--navy);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 18px #071e3520;
+        }
+
+        .logo {
+            color: var(--teal);
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            display: block;
+            color: white;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav a {
+            color: #e5edf5;
+            padding: 9px 12px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--teal);
+            color: var(--navy);
+        }
+
+        .hero {
+            padding: 75px 5%;
+            color: white;
+            background:
+                linear-gradient(90deg, rgba(4, 23, 42, .94),
+                rgba(4, 23, 42, .48)),
+                url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .eyebrow {
+            color: #6ff5df;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 5vw, 54px);
+            line-height: 1.2;
+            margin: 12px 0;
+        }
+
+        .hero h1 span {
+            color: var(--teal);
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #e0eaf3;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 25px;
+            background: var(--teal);
+            color: var(--navy);
+            font-weight: bold;
+            font-size: 14px;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section {
+            padding: 55px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title small {
+            color: var(--teal-dark);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            color: var(--navy);
+            font-size: clamp(27px, 4vw, 35px);
+            margin: 7px 0;
+        }
+
+        .section-title h2 span {
+            color: var(--teal-dark);
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        /* VEHICLE FILTERS */
+
+        .filter-panel {
+            background: white;
+            padding: 24px;
+            border-radius: 15px;
+            margin-bottom: 32px;
+            box-shadow: 0 7px 25px #071e350b;
+            border: 1px solid #e3ebf3;
+        }
+
+        .filter-panel h3 {
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #334155;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d6e0e9;
+            border-radius: 8px;
+            background: #fff;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: var(--teal-dark);
+            box-shadow: 0 0 0 3px #12bfa51c;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .reset-btn {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: var(--navy);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .reset-btn:hover {
+            background: #edf4fa;
+        }
+
+        /* VEHICLE CARDS */
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .vehicle-card {
+            background: white;
+            border: 1px solid #e3ebf3;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 24px #071e350b;
+            transition: .3s;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 30px #071e3518;
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 215px;
+            object-fit: cover;
+            background: #e5edf5;
+        }
+
+        .vehicle-details {
+            padding: 20px;
+        }
+
+        .top-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 9px;
+        }
+
+        .type-badge {
+            color: #087d6a;
+            background: #e0fbf4;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .available {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .rented {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .vehicle-details h3 {
+            color: var(--navy);
+            font-size: 21px;
+            margin-bottom: 4px;
+        }
+
+        .vehicle-number {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 13px;
+        }
+
+        .specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            color: #475569;
+            font-size: 12px;
+            border-bottom: 1px solid #e8eef4;
+            padding-bottom: 14px;
+            margin-bottom: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price {
+            color: var(--navy);
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .price small {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: normal;
+        }
+
+        .book-btn {
+            background: var(--navy);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .book-btn:hover {
+            background: var(--teal-dark);
+        }
+
+        .book-btn.disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 35px 15px;
+            border-radius: 12px;
+            color: var(--muted);
+            margin-top: 15px;
+        }
+
+        .note {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        /* CALL TO ACTION */
+
+        .cta {
+            background: var(--navy);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .cta-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta h2 {
+            font-size: 27px;
+            margin-bottom: 6px;
+        }
+
+        .cta p {
+            color: #cbd5e1;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #041629;
+            color: #cbd5e1;
+            padding: 25px 5%;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: #6ff5df;
+        }
+
+        @media (max-width: 950px) {
+            header {
+                justify-content: center;
+            }
+
+            .vehicle-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 4%;
+            }
+
+            .logo {
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 3px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .hero {
+                padding: 55px 5%;
+            }
+
+            .vehicle-grid,
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .vehicle-card img {
+                height: 220px;
+            }
+
+            .cta-content {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER: SIX PAGE NAVIGATION -->
+
+    <header>
+        <a href="index.html" class="logo">
+            🚘 JACK
+            <span>VEHICLE RENTAL SYSTEM</span>
+        </a>
+
+        
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html">Search</a>
+    <a href="update.html">Update Vehicle</a>
+    <a href="delete.html">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">FIND YOUR PERFECT RIDE</span>
+            <h1>Explore Our <span>Vehicles</span></h1>
+
+            <p>
+                Discover cars, bikes, SUVs and vans for your daily commute,
+                family trip or weekend adventure. Compare rental prices,
+                check the displayed availability and choose your ride.
+            </p>
+
+            <a href="#vehicle-list" class="btn">Browse Vehicles ↓</a>
+        </div>
+    </section>
+
+    <!-- VEHICLE LIST -->
+
+    <main class="section" id="vehicle-list">
+        <div class="container">
+
+            <div class="section-title">
+                <small>OUR FLEET</small>
+                <h2>Find the Right <span>Vehicle</span></h2>
+                <p>Use the filters below to narrow down your choices.</p>
+            </div>
+
+            <!-- FILTERS -->
+
+            <div class="filter-panel">
+                <h3>🔎 Filter Vehicles</h3>
+
+                <div class="filter-grid">
+
+                    <div class="form-group">
+                        <label for="vehicleType">Vehicle Type</label>
+                        <select id="vehicleType">
+                            <option value="all">All Types</option>
+                            <option value="Car">Cars</option>
+                            <option value="Bike">Bikes</option>
+                            <option value="SUV">SUVs</option>
+                            <option value="Van">Vans</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <select id="availability">
+                            <option value="all">All Statuses</option>
+                            <option value="Available">Available</option>
+                            <option value="Rented">Rented</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Daily Budget</label>
+                        <select id="budget">
+                            <option value="all">Any Budget</option>
+                            <option value="1000">Up to ₹1,000</option>
+                            <option value="2000">Up to ₹2,000</option>
+                            <option value="3000">Up to ₹3,000</option>
+                            <option value="5000">Up to ₹5,000</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicleSearch">Search Model</label>
+                        <input
+                            type="text"
+                            id="vehicleSearch"
+                            placeholder="e.g. Hyundai, Honda..."
+                        >
+                    </div>
+
+                </div>
+
+                <div class="filter-actions">
+                    <button type="button" class="btn" onclick="filterVehicles()">
+                        Apply Filters
+                    </button>
+
+                    <button type="button" class="reset-btn" onclick="resetFilters()">
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- VEHICLE CARDS -->
+
+            <div class="vehicle-grid" id="vehicleGrid">
+
+                <!-- 1. HYUNDAI VERNA -->
+
+                <article class="vehicle-card"
+                    data-type="Car" data-status="Available"
+                    data-price="2000" data-name="Hyundai Verna">
+                    <img
+                        src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80"
+                        alt="Hyundai Verna style sedan"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">CAR · SEDAN</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Hyundai Verna</h3>
+                        <p class="vehicle-number">Vehicle No: AP01AB1234</p>
+                        <div class="specs">
+                            <span>👥 5 Seats</span>
+                            <span>⚙️ Automatic</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹2,000 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 2. MARUTI SWIFT -->
+
+                <article class="vehicle-card"
+                    data-type="Car" data-status="Available"
+                    data-price="1500" data-name="Maruti Swift">
+                    <img
+                        src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80"
+                        alt="Stylish car for rental"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">CAR · HATCHBACK</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Maruti Swift</h3>
+                        <p class="vehicle-number">Vehicle No: AP02CD2345</p>
+                        <div class="specs">
+                            <span>👥 5 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹1,500 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 3. HONDA CITY -->
+
+                <article class="vehicle-card"
+                    data-type="Car" data-status="Available"
+                    data-price="2200" data-name="Honda City">
+                    <img
+                        src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=80"
+                        alt="Modern passenger car"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">CAR · SEDAN</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Honda City</h3>
+                        <p class="vehicle-number">Vehicle No: TS08EF3456</p>
+                        <div class="specs">
+                            <span>👥 5 Seats</span>
+                            <span>⚙️ Automatic</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹2,200 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 4. TOYOTA INNOVA -->
+
+                <article class="vehicle-card"
+                    data-type="SUV" data-status="Available"
+                    data-price="3000" data-name="Toyota Innova">
+                    <img
+                        src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80"
+                        alt="Spacious family vehicle"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">SUV · FAMILY</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Toyota Innova</h3>
+                        <p class="vehicle-number">Vehicle No: TS09GH4567</p>
+                        <div class="specs">
+                            <span>👥 7 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹3,000 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5. MAHINDRA SCORPIO -->
+
+                <article class="vehicle-card"
+                    data-type="SUV" data-status="Rented"
+                    data-price="3500" data-name="Mahindra Scorpio">
+                    <img
+                        src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80"
+                        alt="SUV vehicle"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">SUV · PREMIUM</span>
+                            <span class="status rented">Rented</span>
+                        </div>
+                        <h3>Mahindra Scorpio</h3>
+                        <p class="vehicle-number">Vehicle No: AP05EF9012</p>
+                        <div class="specs">
+                            <span>👥 7 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹3,500 <small>/ day</small></div>
+                            <a href="#" class="book-btn disabled" aria-disabled="true">
+                                Currently Rented
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6. KIA SELTOS -->
+
+                <article class="vehicle-card"
+                    data-type="SUV" data-status="Available"
+                    data-price="2800" data-name="Kia Seltos">
+                    <img
+                        src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80"
+                        alt="Modern SUV for rental"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">SUV · COMPACT</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Kia Seltos</h3>
+                        <p class="vehicle-number">Vehicle No: TS10JK5678</p>
+                        <div class="specs">
+                            <span>👥 5 Seats</span>
+                            <span>⚙️ Automatic</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹2,800 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7. ROYAL ENFIELD -->
+
+                <article class="vehicle-card"
+                    data-type="Bike" data-status="Available"
+                    data-price="800" data-name="Royal Enfield Classic">
+                    <img
+                        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=900&q=80"
+                        alt="Motorcycle for rental"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">BIKE · CRUISER</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Royal Enfield Classic</h3>
+                        <p class="vehicle-number">Vehicle No: TS09CD5678</p>
+                        <div class="specs">
+                            <span>👥 2 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>🏍️ Cruiser</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹800 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 8. HONDA ACTIVA -->
+
+                <article class="vehicle-card"
+                    data-type="Bike" data-status="Available"
+                    data-price="500" data-name="Honda Activa">
+                    <img
+                        src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=900&q=80"
+                        alt="Two wheeler for city travel"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">BIKE · SCOOTER</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Honda Activa</h3>
+                        <p class="vehicle-number">Vehicle No: AP03LM6789</p>
+                        <div class="specs">
+                            <span>👥 2 Seats</span>
+                            <span>⚙️ Automatic</span>
+                            <span>🛵 City Ride</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹500 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 9. YAMAHA R15 -->
+
+                <article class="vehicle-card"
+                    data-type="Bike" data-status="Available"
+                    data-price="1000" data-name="Yamaha R15">
+                    <img
+                        src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=900&q=80"
+                        alt="Sport motorcycle"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">BIKE · SPORTS</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Yamaha R15</h3>
+                        <p class="vehicle-number">Vehicle No: TS11MN7890</p>
+                        <div class="specs">
+                            <span>👥 2 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>🏁 Sports</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹1,000 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 10. MARUTI ERTIGA -->
+
+                <article class="vehicle-card"
+                    data-type="Van" data-status="Available"
+                    data-price="2500" data-name="Maruti Ertiga">
+                    <img
+                        src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80"
+                        alt="Family travel vehicle"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">VAN · FAMILY</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Maruti Ertiga</h3>
+                        <p class="vehicle-number">Vehicle No: AP04PQ8901</p>
+                        <div class="specs">
+                            <span>👥 7 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹2,500 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 11. TATA NEXON -->
+
+                <article class="vehicle-card"
+                    data-type="SUV" data-status="Available"
+                    data-price="2300" data-name="Tata Nexon">
+                    <img
+                        src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=900&q=80"
+                        alt="Compact vehicle for travel"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">SUV · COMPACT</span>
+                            <span class="status available">Available</span>
+                        </div>
+                        <h3>Tata Nexon</h3>
+                        <p class="vehicle-number">Vehicle No: TS12RS9012</p>
+                        <div class="specs">
+                            <span>👥 5 Seats</span>
+                            <span>⚙️ Manual</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹2,300 <small>/ day</small></div>
+                            <a href="booking.html" class="book-btn">Book Now</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 12. HYUNDAI CRETA -->
+
+                <article class="vehicle-card"
+                    data-type="SUV" data-status="Rented"
+                    data-price="2700" data-name="Hyundai Creta">
+                    <img
+                        src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80"
+                        alt="SUV for family journeys"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <div class="top-line">
+                            <span class="type-badge">SUV · PREMIUM</span>
+                            <span class="status rented">Rented</span>
+                        </div>
+                        <h3>Hyundai Creta</h3>
+                        <p class="vehicle-number">Vehicle No: AP06ST0123</p>
+                        <div class="specs">
+                            <span>👥 5 Seats</span>
+                            <span>⚙️ Automatic</span>
+                            <span>❄️ AC</span>
+                        </div>
+                        <div class="price-row">
+                            <div class="price">₹2,700 <small>/ day</small></div>
+                            <a href="#" class="book-btn disabled" aria-disabled="true">
+                                Currently Rented
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="no-results" id="noResults">
+                <h3>😕 No vehicles found</h3>
+                <p>Try changing your filters or search for another model.</p>
+            </div>
+
+            <p class="note">
+                Note: Vehicle details, registration numbers, prices and availability
+                shown here are sample demonstration data. Confirm actual availability
+                and rental charges with the rental team.
+            </p>
+
+        </div>
+    </main>
+
+    <!-- CALL TO ACTION -->
+
+    <section class="cta">
+        <div class="container cta-content">
+            <div>
+                <h2>Found Your Perfect Vehicle?</h2>
+                <p>Submit your rental request and confirm the details with our team.</p>
+            </div>
+
+            <a href="booking.html" class="btn">Go to Booking →</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <p>© 2026 Jack Vehicle Rental System. All Rights Reserved.</p>
+        <p style="margin-top: 8px;">
+            <a href="index.html">Home</a> |
+            <a href="vehicles.html">Vehicles</a> |
+            <a href="add-vehicle.html">Add Vehicle</a> |
+            <a href="booking.html">Booking</a> |
+            <a href="search.html">Search</a> |
+            <a href="contact.html">Contact</a>
+        </p>
+    </footer>
+
+    <!-- FILTER JAVASCRIPT -->
+
+    <script>
+        function filterVehicles() {
+            const type = document.getElementById("vehicleType").value;
+            const status = document.getElementById("availability").value;
+            const budgetValue = document.getElementById("budget").value;
+            const search = document.getElementById("vehicleSearch")
+                .value.trim().toLowerCase();
+
+            const budget = budgetValue === "all"
+                ? Infinity
+                : Number(budgetValue);
+
+            const cards = document.querySelectorAll(".vehicle-card");
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cardType = card.dataset.type;
+                const cardStatus = card.dataset.status;
+                const cardPrice = Number(card.dataset.price);
+                const cardName = card.dataset.name.toLowerCase();
+
+                const matchesType = type === "all" || cardType === type;
+                const matchesStatus = status === "all" || cardStatus === status;
+                const matchesBudget = cardPrice <= budget;
+                const matchesSearch = cardName.includes(search);
+
+                const show = matchesType &&
+                             matchesStatus &&
+                             matchesBudget &&
+                             matchesSearch;
+
+                card.style.display = show ? "" : "none";
+
+                if (show) {
+                    visibleCount++;
+                }
+            });
+
+            document.getElementById("noResults").style.display =
+                visibleCount === 0 ? "block" : "none";
+        }
+
+        function resetFilters() {
+            document.getElementById("vehicleType").value = "all";
+            document.getElementById("availability").value = "all";
+            document.getElementById("budget").value = "all";
+            document.getElementById("vehicleSearch").value = "";
+
+            filterVehicles();
+        }
+
+        // Apply filters when dropdowns or search text changes.
+        document.getElementById("vehicleType")
+            .addEventListener("change", filterVehicles);
+
+        document.getElementById("availability")
+            .addEventListener("change", filterVehicles);
+
+        document.getElementById("budget")
+            .addEventListener("change", filterVehicles);
+
+        document.getElementById("vehicleSearch")
+            .addEventListener("input", filterVehicles);
+    </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack Vehicle Rental System | Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --navy: #071e35;
+            --teal: #12bfa5;
+            --teal-dark: #07977f;
+            --light: #f3f8fc;
+            --text: #25364a;
+            --muted: #64748b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            color: var(--teal);
+            font-size: 25px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .logo span {
+            display: block;
+            color: white;
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        nav a {
+            color: #e5edf5;
+            padding: 9px 12px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--teal);
+            color: var(--navy);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 470px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg,
+                rgba(4, 23, 42, 0.96) 0%,
+                rgba(4, 23, 42, 0.79) 42%,
+                rgba(4, 23, 42, 0.18) 100%),
+                url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 65px 0;
+            color: white;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: #6ff5df;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            max-width: 620px;
+            font-size: clamp(36px, 5vw, 59px);
+            line-height: 1.12;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--teal);
+        }
+
+        .hero p {
+            max-width: 560px;
+            color: #e1eaf3;
+            font-size: 17px;
+            margin-bottom: 27px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 23px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--teal);
+            color: var(--navy);
+        }
+
+        .btn-primary:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            color: white;
+            border: 1px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--navy);
+        }
+
+        /* QUICK FEATURES */
+
+        .features {
+            background: white;
+            padding: 28px 0;
+            border-bottom: 1px solid #e6edf4;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .feature-icon {
+            width: 53px;
+            height: 53px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e2fbf5;
+            color: var(--navy);
+            border-radius: 15px;
+            font-size: 25px;
+            margin: 0 auto 12px;
+        }
+
+        .feature h3 {
+            color: var(--navy);
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* COMMON SECTIONS */
+
+        section.content-section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title .small-title {
+            display: block;
+            color: var(--teal-dark);
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .section-title h2 {
+            color: var(--navy);
+            font-size: clamp(27px, 3.5vw, 36px);
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 span {
+            color: var(--teal-dark);
+        }
+
+        .section-title p {
+            color: var(--muted);
+            max-width: 680px;
+            margin: auto;
+            font-size: 15px;
+        }
+
+        /* VEHICLE COLLECTION */
+
+        .vehicle-section {
+            background: linear-gradient(180deg, #eff7ff, #f8fbff);
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .vehicle-card {
+            background: white;
+            border: 1px solid #e6edf4;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 7px 24px rgba(7, 30, 53, 0.06);
+            transition: 0.3s;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(7, 30, 53, 0.13);
+        }
+
+        .vehicle-card img {
+            width: 100%;
+            height: 205px;
+            object-fit: cover;
+            background: #e5edf5;
+        }
+
+        .vehicle-details {
+            padding: 22px;
+        }
+
+        .vehicle-details h3 {
+            color: var(--navy);
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .vehicle-details p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .vehicle-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .vehicle-tag {
+            background: #e2fbf5;
+            color: #087d6a;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 20px;
+        }
+
+        .small-btn {
+            background: var(--navy);
+            color: white;
+            padding: 9px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .small-btn:hover {
+            background: var(--teal-dark);
+        }
+
+        .center-action {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        /* ABOUT AND MANAGER */
+
+        .about-section {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 12px 32px rgba(7, 30, 53, 0.15);
+        }
+
+        .image-label {
+            position: absolute;
+            left: 18px;
+            bottom: 18px;
+            background: rgba(7, 30, 53, 0.91);
+            color: white;
+            padding: 13px 18px;
+            border-radius: 10px;
+        }
+
+        .image-label strong {
+            display: block;
+            color: #6ff5df;
+            font-size: 16px;
+        }
+
+        .image-label span {
+            font-size: 12px;
+        }
+
+        .about-content .small-title {
+            color: var(--teal-dark);
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .about-content h2 {
+            font-size: 34px;
+            color: var(--navy);
+            line-height: 1.25;
+            margin: 12px 0 18px;
+        }
+
+        .about-content h2 span {
+            color: var(--teal-dark);
+        }
+
+        .about-content > p {
+            color: var(--muted);
+            margin-bottom: 17px;
+            font-size: 15px;
+        }
+
+        .check-list {
+            list-style: none;
+            margin: 20px 0 25px;
+        }
+
+        .check-list li {
+            margin: 11px 0;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        .check-list li::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            margin-right: 10px;
+            background: #d8faf1;
+            color: #087d6a;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        /* UPDATED MANAGER CARD */
+
+        .manager-card {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            background: #f0fbf8;
+            border: 1px solid #c8f2e8;
+            padding: 22px;
+            border-radius: 15px;
+            margin-top: 25px;
+            box-shadow: 0 6px 20px rgba(7, 30, 53, 0.06);
+        }
+
+        .manager-card img {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 15px;
+            border: 4px solid white;
+            box-shadow: 0 5px 18px rgba(7, 30, 53, 0.18);
+        }
+
+        .manager-card h3 {
+            color: var(--navy);
+            font-size: 21px;
+            margin-bottom: 3px;
+        }
+
+        .manager-card .designation {
+            color: var(--teal-dark);
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .manager-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 9px;
+        }
+
+        /* BUSINESS HIGHLIGHTS */
+
+        .stats-section {
+            background: var(--navy);
+            color: white;
+            padding: 38px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 12px;
+            border-right: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat h3 {
+            color: #51ecd3;
+            font-size: 33px;
+            margin-bottom: 4px;
+        }
+
+        .stat p {
+            color: #d2deea;
+            font-size: 14px;
+        }
+
+        /* HOW IT WORKS */
+
+        .process-section {
+            background: #f4f9fd;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .process-card {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 14px;
+            border: 1px solid #e4edf5;
+            text-align: center;
+            box-shadow: 0 7px 22px rgba(7, 30, 53, 0.04);
+        }
+
+        .process-number {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background: var(--navy);
+            color: #6ff5df;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .process-card h3 {
+            color: var(--navy);
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .process-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* WHY CHOOSE US */
+
+        .benefits-section {
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .benefit-card {
+            padding: 24px 20px;
+            background: #f7fafc;
+            border: 1px solid #e8eef4;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .benefit-card:hover {
+            background: #e9fbf6;
+            transform: translateY(-5px);
+        }
+
+        .benefit-card .emoji {
+            font-size: 29px;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card h3 {
+            color: var(--navy);
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .benefit-card p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* CUSTOMER REVIEWS */
+
+        .reviews-section {
+            background: linear-gradient(120deg, #e9fbf7, #eff7ff);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 6px 22px rgba(7, 30, 53, 0.05);
+        }
+
+        .stars {
+            color: #f5a623;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .review-card > p {
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .review-person {
+            color: var(--navy);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .review-person span {
+            display: block;
+            color: var(--muted);
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        /* CALL TO ACTION */
+
+        .cta-section {
+            background:
+                linear-gradient(90deg,
+                rgba(5, 25, 44, 0.96),
+                rgba(5, 25, 44, 0.72)),
+                url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            padding: 52px 0;
+        }
+
+        .cta-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            color: white;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(25px, 4vw, 34px);
+            margin-bottom: 8px;
+        }
+
+        .cta-content p {
+            color: #dce7f1;
+            font-size: 15px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #041629;
+            color: #cbd5e1;
+            padding: 45px 0 18px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr;
+            gap: 35px;
+            padding-bottom: 30px;
+        }
+
+        .footer-brand h2 {
+            color: var(--teal);
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .footer-brand h2 span {
+            color: white;
+        }
+
+        .footer-brand p,
+        .footer-column p {
+            color: #aebdcd;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #bdcbd9;
+            font-size: 13px;
+            margin: 8px 0;
+            transition: 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: #55f1d7;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.13);
+            padding-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: #9dafc1;
+        }
+
+        /* TABLET RESPONSIVE */
+
+        @media (max-width: 950px) {
+            header {
+                justify-content: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .vehicle-grid,
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image img {
+                height: 350px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 4%;
+            }
+
+            .logo {
+                text-align: center;
+            }
+
+            nav {
+                gap: 3px;
+            }
+
+            nav a {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .hero {
+                min-height: 440px;
+                background-position: 60% center;
+            }
+
+            .hero-content {
+                padding: 45px 0;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            section.content-section {
+                padding: 48px 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .vehicle-grid,
+            .process-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .benefit-card {
+                padding: 17px 14px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat:nth-child(2) {
+                border-right: none;
+            }
+
+            .stat h3 {
+                font-size: 27px;
+            }
+
+            .about-content h2 {
+                font-size: 29px;
+            }
+
+            .about-image img {
+                height: 300px;
+            }
+
+            /* Manager image mobile size */
+            .manager-card {
+                gap: 14px;
+                padding: 14px;
+                align-items: flex-start;
+            }
+
+            .manager-card img {
+                width: 100px;
+                height: 120px;
+            }
+
+            .manager-card h3 {
+                font-size: 18px;
+            }
+
+            .manager-card p {
+                font-size: 12px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px 15px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+
+            .cta-content {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER AND SIX PAGE NAVIGATION -->
+
+    <header>
+        <a href="index.html" class="logo">
+            🚘 JACK
+            <span>VEHICLE RENTAL SYSTEM</span>
+        </a>
+
+        
+<nav>
+    <a href="index.html">Home</a>
+    <a href="vehicles.html">Vehicles</a>
+    <a href="add-vehicle.html">Add Vehicle</a>
+    <a href="booking.html">Booking</a>
+    <a href="search.html">Search</a>
+    <a href="update.html">Update Vehicle</a>
+    <a href="delete.html">Delete Vehicle</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+    </header>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">EXPLORE • RIDE • DISCOVER</span>
+
+            <h1>
+                Your Journey<br>
+                <span>Our Priority</span>
+            </h1>
+
+            <p>
+                Welcome to Jack Vehicle Rental System. Discover reliable,
+                comfortable and affordable vehicles for daily travel,
+                family trips, business journeys and weekend adventures.
+                Choose your ride and start your journey with confidence.
+            </p>
+
+            <div class="button-group">
+                <a href="vehicles.html" class="btn btn-primary">
+                    View Vehicles →
+                </a>
+
+                <a href="booking.html" class="btn btn-outline">
+                    Book Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK FEATURES -->
+
+    <section class="features">
+        <div class="container feature-grid">
+
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <h3>Safe & Secure</h3>
+                <p>Vehicle condition and customer safety are important to us.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Affordable Rates</h3>
+                <p>Rental options designed for different budgets.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🎧</div>
+                <h3>Customer Support</h3>
+                <p>Contact our team for booking and rental assistance.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🚘</div>
+                <h3>Wide Range</h3>
+                <p>Explore cars, bikes, SUVs and vans.</p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📅</div>
+                <h3>Easy Booking</h3>
+                <p>Submit your rental request through our booking page.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VEHICLE COLLECTION -->
+
+    <section class="content-section vehicle-section" id="vehicles">
+        <div class="container">
+
+            <div class="section-title">
+                <span class="small-title">OUR VEHICLE COLLECTION</span>
+                <h2>Choose Your <span>Perfect Ride</span></h2>
+                <p>
+                    From comfortable cars to stylish bikes and spacious SUVs,
+                    explore the type of vehicle that suits your travel plans.
+                </p>
+            </div>
+
+            <div class="vehicle-grid">
+
+                <article class="vehicle-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80"
+                        alt="Car available for rental"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <h3>Cars</h3>
+                        <p>
+                            A comfortable choice for daily travel, city trips,
+                            personal journeys and small families.
+                        </p>
+                        <div class="vehicle-bottom">
+                            <span class="vehicle-tag">Comfortable Ride</span>
+                            <a href="vehicles.html" class="small-btn">View Cars →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="vehicle-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"
+                        alt="Motorcycle available for rental"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <h3>Bikes</h3>
+                        <p>
+                            A practical option for solo travel, short rides
+                            and exploring places at your own pace.
+                        </p>
+                        <div class="vehicle-bottom">
+                            <span class="vehicle-tag">Easy Travel</span>
+                            <a href="vehicles.html" class="small-btn">View Bikes →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="vehicle-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80"
+                        alt="SUV available for rental"
+                        loading="lazy"
+                    >
+                    <div class="vehicle-details">
+                        <h3>SUVs</h3>
+                        <p>
+                            Spacious vehicles for group travel, family
+                            outings and longer journeys.
+                        </p>
+                        <div class="vehicle-bottom">
+                            <span class="vehicle-tag">Extra Space</span>
+                            <a href="vehicles.html" class="small-btn">View SUVs →</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="center-action">
+                <a href="vehicles.html" class="btn btn-primary">
+                    Explore All Vehicles →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT AND MANAGER SECTION -->
+
+    <section class="content-section about-section">
+        <div class="container about-grid">
+
+            <div class="about-image">
+                <img
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85"
+                    alt="Professional business office"
+                    loading="lazy"
+                >
+
+                <div class="image-label">
+                    <strong>JACK VEHICLE RENTAL</strong>
+                    <span>Your travel partner</span>
+                </div>
+            </div>
+
+            <div class="about-content">
+                <span class="small-title">ABOUT OUR COMPANY</span>
+
+                <h2>
+                    Making Every Journey <span>Simple & Comfortable</span>
+                </h2>
+
+                <p>
+                    Jack Vehicle Rental System is designed to make vehicle
+                    rental enquiries and booking requests easier. Customers
+                    can explore vehicles, check available information and
+                    submit their rental requirements in one place.
+                </p>
+
+                <p>
+                    Our goal is to provide a convenient experience with
+                    clear information, simple navigation and helpful
+                    customer support throughout the rental process.
+                </p>
+
+                <ul class="check-list">
+                    <li>Easy access to vehicle information</li>
+                    <li>Simple online booking request form</li>
+                    <li>Options for different travel requirements</li>
+                    <li>Customer-focused service and assistance</li>
+                </ul>
+
+                <a href="contact.html" class="btn btn-primary">
+                    Contact Our Team →
+                </a>
+
+                <!-- LARGE MANAGER PHOTO -->
+
+                <div class="manager-card">
+                    <img
+                        src="jack.jpeg"
+                        alt="Jack Vehicle Rental manager"
+                        loading="lazy"
+                    >
+
+                    <div>
+                        <h3>Jakeer Basha</h3>
+
+                        <div class="designation">
+                            Manager · Jack Vehicle Rental System
+                        </div>
+
+                        <p>
+                            “Our goal is to make every customer's rental
+                            experience convenient, clear and comfortable.”
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BUSINESS HIGHLIGHTS -->
+
+    <section class="stats-section">
+        <div class="container stats-grid">
+
+            <div class="stat">
+                <h3>Easy</h3>
+                <p>Rental Enquiries</p>
+            </div>
+
+            <div class="stat">
+                <h3>Wide</h3>
+                <p>Vehicle Choices</p>
+            </div>
+
+            <div class="stat">
+                <h3>Simple</h3>
+                <p>Booking Requests</p>
+            </div>
+
+            <div class="stat">
+                <h3>Helpful</h3>
+                <p>Customer Support</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+
+    <section class="content-section process-section">
+        <div class="container">
+
+            <div class="section-title">
+                <span class="small-title">SIMPLE RENTAL PROCESS</span>
+                <h2>How It <span>Works</span></h2>
+                <p>
+                    Follow these simple steps to send your vehicle rental request.
+                </p>
+            </div>
+
+            <div class="process-grid">
+
+                <div class="process-card">
+                    <div class="process-number">1</div>
+                    <h3>Choose a Vehicle</h3>
+                    <p>
+                        Browse our vehicle collection and select the vehicle
+                        category that fits your journey.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-number">2</div>
+                    <h3>Submit Booking</h3>
+                    <p>
+                        Enter your contact details, rental dates and other
+                        required information in the booking form.
+                    </p>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-number">3</div>
+                    <h3>Confirm Details</h3>
+                    <p>
+                        Contact the rental team to confirm availability,
+                        final charges and booking arrangements.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+
+    <section class="content-section benefits-section">
+        <div class="container">
+
+            <div class="section-title">
+                <span class="small-title">THE JACK ADVANTAGE</span>
+                <h2>Why Choose <span>Jack?</span></h2>
+                <p>
+                    A user-friendly rental website designed around your
+                    travel needs and convenience.
+                </p>
+            </div>
+
+            <div class="benefits-grid">
+
+                <div class="benefit-card">
+                    <div class="emoji">🚗</div>
+                    <h3>Vehicle Choices</h3>
+                    <p>
+                        Explore different vehicle types for personal,
+                        family and group travel.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="emoji">💳</div>
+                    <h3>Clear Information</h3>
+                    <p>
+                        Review the displayed vehicle details and rental
+                        information before sending a request.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="emoji">📱</div>
+                    <h3>Simple Website</h3>
+                    <p>
+                        Navigate the website on desktop, tablet or mobile
+                        with a responsive layout.
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="emoji">🤝</div>
+                    <h3>Personal Assistance</h3>
+                    <p>
+                        Use the contact page to ask questions about
+                        vehicles and rental arrangements.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOMER REVIEWS -->
+
+    <section class="content-section reviews-section">
+        <div class="container">
+
+            <div class="section-title">
+                <span class="small-title">CUSTOMER FEEDBACK</span>
+                <h2>What Customers <span>Value</span></h2>
+                <p>
+                    Clear information and a smooth rental process help
+                    customers plan their journeys.
+                </p>
+            </div>
+
+            <div class="reviews-grid">
+
+                <article class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        “The website layout is simple, and the vehicle
+                        categories are easy to understand. Finding the
+                        booking page is convenient.”
+                    </p>
+                    <div class="review-person">
+                        Website Visitor
+                        <span>Vehicle browsing feedback</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        “The booking form makes it easier to provide
+                        the required rental details and contact information.”
+                    </p>
+                    <div class="review-person">
+                        Booking Visitor
+                        <span>Booking form feedback</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        “The navigation links and contact information
+                        make it easy to find the page I need.”
+                    </p>
+                    <div class="review-person">
+                        Website Visitor
+                        <span>Website usability feedback</span>
+                    </div>
+                </article>
+
+            </div>
+
+            <p style="text-align:center; color:#64748b; font-size:12px; margin-top:18px;">
+                Sample feedback cards for demonstration. Replace with genuine customer reviews.
+            </p>
+
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+
+    <section class="cta-section">
+        <div class="container cta-content">
+
+            <div>
+                <h2>Ready for Your Next Journey?</h2>
+                <p>
+                    Explore the vehicle collection and submit your rental request today.
+                </p>
+            </div>
+
+            <div class="button-group">
+                <a href="vehicles.html" class="btn btn-primary">
+                    View All Vehicles →
+                </a>
+
+                <a href="booking.html" class="btn btn-outline">
+                    Book a Vehicle
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <h2>🚘 JACK <span>RENTAL</span></h2>
+                    <p>
+                        Jack Vehicle Rental System helps visitors explore
+                        vehicle options and submit rental enquiries through
+                        a simple, professional website.
+                    </p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="vehicles.html">Vehicles</a>
+                    <a href="add-vehicle.html">Add Vehicle</a>
+                    <a href="booking.html">Booking</a>
+                    <a href="search.html">Search</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Details</h3>
+                    <p>📍 Your City, Telangana, India</p>
+                    <p>📞 +91 XXXXX XXXXX</p>
+                    <p>✉️ your-email@example.com</p>
+                    <p>🕒 Monday–Saturday, 9 AM–7 PM</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <a href="vehicles.html">Explore Vehicles</a>
+                    <a href="booking.html">Rental Booking</a>
+                    <a href="search.html">Search Vehicles</a>
+                    <a href="contact.html">Customer Enquiries</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Jack Vehicle Rental System. All Rights Reserved.</p>
+                <p>Reliable Rides. Comfortable Journeys.</p>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
+```
